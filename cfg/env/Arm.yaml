@@ -1,0 +1,79 @@
+# used to create the object
+env_name: Arm
+# if given, will override the device setting in gym. 
+
+num_envs: 2048
+#numEnvs: 4
+envSpacing: 4.0
+resetDist: 3.0
+maxEffort: 400.0
+
+clipObservations: 5.0
+clipActions: 1.0
+
+asset:
+  assetRoot: "../assets"
+  assetFileName: "urdf/arm.urdf"
+
+# set to True if you use camera sensors in the environment
+enableCameraSensors: False
+
+episode_max_step: 500
+total_episodes: 50
+max_episode_length: 500
+
+log_interval: 5
+
+mode: "train" # train or test
+
+eval: True
+eval_interval: 2
+eval_episodes: 1
+save_model: False  # save model after evaluation
+render: False  # render env
+record: False  # dump config, record video only works if env is rendered
+log_path: "logs/"  # config, video, model log path
+
+#BF shaping
+use_bf: True
+exp_A: 0.1269
+exp_B: 11
+
+task:
+  rand_weights:       True
+  rand_vel_targets:   True
+  task_w: [1,1,1,1]
+  task_w_eval: [1,1,1,1]
+
+
+feature:
+  type: "regular"
+  regular: [True, True, True, True, True]
+
+sim:
+  sim_device: "cuda:0"
+  headless: True
+  compute_device_id: 0
+  graphics_device_id: 0
+
+  dt: 0.0166 # 1/60 s
+  substeps: 2
+  up_axis: "z"
+  use_gpu_pipeline: True
+  gravity: [0.0, 0.0, -9.81]
+  physx:
+    num_threads: 4
+    solver_type: 1
+    use_gpu: True # set to False to run on CPU
+    num_position_iterations: 4
+    num_velocity_iterations: 0
+    contact_offset: 0.02
+    rest_offset: 0.001
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 100.0
+    default_buffer_size_multiplier: 2.0
+    max_gpu_contact_pairs: 1048576 # 1024*1024
+    num_subscenes: 4
+    contact_collection: 0 # 0: CC_NEVER (don't collect contact info), 1: CC_LAST_SUBSTEP (collect only contacts on last substep), 2: CC_ALL_SUBSTEPS (broken - do not use!)
+
+

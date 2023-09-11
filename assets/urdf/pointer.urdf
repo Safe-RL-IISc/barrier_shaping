@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="thepointer">
+<link name="base_link">
+  <visual>
+    <geometry>
+      <mesh filename="../mesh/tri_prism.dae" scale="0.4 0.4 0.4" />
+    </geometry>
+      <material name="aaaa">
+        <color rgba="0.0 0.0 0.0 1"/>
+      </material>
+    <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+  </visual>
+  <collision>
+    <geometry>
+      <mesh filename="../mesh/tri_prism.dae" scale="0.4 0.4 0.4" />
+    </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+</collision>
+  <inertial>
+    <mass value="0.5"/>
+    <inertia ixx="0.00667" ixy="0.0" ixz="0.0" iyy="0.040266" iyz="0.0" izz="0.046399"/>
+</inertial>
+</link>
+
+<link name="pointer">
+  <visual>
+    <geometry>
+      <mesh filename="../mesh/tri_prism.dae" scale="0.4 0.4 0.4" />
+    </geometry>
+      <material name="bbbb">
+        <color rgba="1.0 1.0 1.0 1"/>
+      </material>
+    <origin rpy="1.57075 0 0" xyz="0 0 0.08"/>
+  </visual>
+  <collision>
+    <geometry>
+      <mesh filename="../mesh/tri_prism.dae" scale="0.4 0.4 0.4" />
+    </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0.08"/>
+</collision>
+  <inertial>
+    <mass value="0.5"/>
+    <inertia ixx="0.00667" ixy="0.0" ixz="0.0" iyy="0.040266" iyz="0.0" izz="0.046399"/>
+</inertial>
+</link>
+
+<joint name="base_to_pointer" type="fixed">
+  <parent link="base_link"/>
+  <child link="pointer"/>
+  <origin xyz="0 0 0"/>
+</joint>
+
+</robot>

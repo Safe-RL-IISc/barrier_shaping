@@ -1,0 +1,24 @@
+program: run.py
+method: bayes
+metric:
+  goal: maximize
+  name: rewards/step
+
+parameters:
+  env.exp_A:
+    min: 0.05
+    max: 1.0
+  env.exp_B:
+    min: 1
+    max: 15
+  agent.total_timesteps: 
+    values: [25000000]
+  # seed:
+  #   values: [343, 3497, 91, 7806, 4437]
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - agent=PPO
+  - env=Arm

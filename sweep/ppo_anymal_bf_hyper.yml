@@ -1,0 +1,22 @@
+program: run.py
+method: grid
+metric:
+  goal: maximize
+  name: rewards/step
+
+parameters:
+  env.exp_A:
+    values: [0.001, 0.005, 0.01, 0.05, 0.1]
+  env.exp_B:
+    values: [0.9, 1.0, 1.5, 2.0, 2.5, 3.5]
+  agent.total_timesteps: 
+    values: [20000000]
+  # seed:
+  #   values: [343, 3497, 91, 7806, 4437]
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - agent=PPO
+  - env=Anymal

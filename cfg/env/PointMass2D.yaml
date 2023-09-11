@@ -1,0 +1,60 @@
+env_name: "PointMass2D"
+num_envs: 1024
+
+goal_lim: 10
+vel_lim: 5
+goal_vel_lim: 5
+
+dim: 2
+episode_max_step: 500
+total_episodes: 30
+max_episode_length: 500
+log_interval: 5
+
+mode: "train" # train or test
+
+eval: True
+eval_interval: 2
+eval_episodes: 1
+save_model: False  # save model after evaluation
+render: False  # render env
+record: False  # dump config, record video only works if env is rendered
+log_path: "logs/"  # config, video, model log path
+
+task:
+  rand_weights:      True
+  rand_vel_targets:  True
+
+  proximity_threshold: 3
+
+  # targets for play
+  target_pos:       [0, 0, 2] # x, y
+  target_vel:       [0, 0, 0] # vx, vy, vz
+
+  task_w:      [0, 0, 0.2, 1]  # |p|, v, |v|, prox
+  task_w_eval: [0, 0, 0.2, 1]
+
+  # can be "uniform", "permute", "identity", "achievable"
+  task_w_randType: "achievable"
+  task_w_randAdaptive: True
+
+  # set of achievable task weights
+  task_wa: [[1, 0, 0, 0, 0],
+            [0, 1, 1, 0, 0], 
+            [0, 1, 0, 0, 0], 
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 1, 1]]
+
+feature:
+  type: "regular"
+  pos_index: 0
+  regular: [True, True, True, True]
+  #regular: [True, True, False, False]
+  
+sim:
+  sim_device: "cuda:0"
+  headless: True
+  compute_device_id: 0
+  graphics_device_id: 0

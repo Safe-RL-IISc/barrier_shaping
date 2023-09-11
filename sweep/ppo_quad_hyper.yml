@@ -1,0 +1,19 @@
+program: run.py
+method: bayes
+metric:
+  goal: maximize
+  name: rewards/step
+
+parameters:
+  agent.learning_rate:
+    min: 0.001
+    max: 0.01
+  seed:
+    values: [343, 3497, 91, 7806, 4437]
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - agent=PPO
+  - env=Quadcopter

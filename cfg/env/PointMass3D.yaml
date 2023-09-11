@@ -1,0 +1,44 @@
+env_name: "PointMass3D"
+num_envs: 1024
+dim: 3
+episode_max_step: 50
+total_episodes: 300
+max_episode_length: 500
+reward:
+  success: 
+    coeff": 1
+success_threshold: [1, 1, 1, 1]  # pos[m], vel[m/s], ang[rad], angvel[rad/s]
+single_task: True  # overwrite all task_weight to nav_w
+log_interval: 5
+eval: True
+eval_interval: 10
+eval_episodes: 1
+save_model: False  # save model after evaluation
+render: False  # render env
+record: False  # dump config, record video only works if env is rendered
+log_path: "../logs/"  # config, video, model log path
+
+task:
+  single:
+    nav_w: [1, 0.1, 0, 0, 1]  # p, v, ang, angvel, success
+    hov_w: [1, 0.1, 0, 0, 1] 
+    nav_w_eval: [1, 0.1, 0, 0, 1] 
+    hov_w_eval: [1, 0.1, 0, 0, 1] 
+  multi:
+    nav_w: [1, 0, 0, 0, 0]  # p, v, ang, angvel, success
+    hov_w: [0, 1, 0, 0, 0]
+    nav_w_eval: [0, 0, 0, 0, 1]
+    hov_w_eval: [0, 0, 0, 0, 1]
+
+feature:
+  type: "regular"
+  pos_index: 3
+  simple: [True, False, False, False, False, False, False]
+  regular: [True, False, False, True, False, False, True]
+  augment: [True, True, True, True, False, False, True]
+  
+sim:
+  sim_device: "cuda:0"
+  headless: True
+  compute_device_id: 0
+  graphics_device_id: 0
